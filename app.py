@@ -58,9 +58,11 @@ def ask_ai(prompt):
             st.error("AI returned an empty response. Try again.")
             return None
         return response.text
-    except Exception:
-        st.error("AI request failed. Check your Gemini API key, model access, and rate limits.")
+        
+    except Exception as e:
+        st.error(f"Gemini error: {type(e).__name__}: {e}")
         return None
+
 
 
 st.title("📐 AI Math Differentiator")
