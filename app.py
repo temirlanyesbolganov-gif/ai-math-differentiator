@@ -35,8 +35,10 @@ def get_api_key():
         return st.secrets["GEMINI_API_KEY"]
     except (KeyError, FileNotFoundError):
         return None
-    except Exception:
-        return None
+    except Exception as e:
+        
+        print(f"Gemini API error: {type(e).__name__}: {e}", flush=True)
+
 
 
 def ask_ai(prompt):
