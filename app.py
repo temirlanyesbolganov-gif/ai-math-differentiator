@@ -49,11 +49,14 @@ def ask_ai(prompt):
         st.error("AI key is missing. Add GEMINI_API_KEY to Streamlit Cloud Secrets.")
         return None
     try:
+
         with st.spinner("AI is thinking…"):
-            response = genai.Client(api_key=key).models.generate_content(
-                model=MODEL,
-                contents=prompt,
-            )
+            with genai.Client(api_key=key) as client:
+                response = client.models.generate_content(
+                    model=MODEL,
+                    contents=prompt,
+                )
+
         if not response.text:
             st.error("AI returned an empty response. Try again.")
             return None
