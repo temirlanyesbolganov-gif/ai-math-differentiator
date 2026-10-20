@@ -34,10 +34,11 @@ def get_api_key():
     try:
         return st.secrets["GEMINI_API_KEY"]
     except (KeyError, FileNotFoundError):
-        return None
+        return None  
     except Exception as e:
-        
-        print(f"Gemini API error: {type(e).__name__}: {e}", flush=True)
+        st.error(f"Gemini error: {type(e).__name__}: {e}")
+        return None
+
 
 
 
